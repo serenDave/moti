@@ -1,0 +1,19 @@
+extends base
+
+block content
+    main.main
+        each criterion in criteria
+            div
+                span= criterion.idCrit
+                | 
+                span= criterion.CName
+                | 
+                span= criterion.CRange
+                | 
+                span= criterion.CType
+                | 
+                span= criterion.OptimType
+                | 
+                span= criterion.Edlzmer
+                | 
+                span= criterion.ScaleType

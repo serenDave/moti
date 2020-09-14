@@ -1,0 +1,3 @@
+POST /create body: type, ...parameters
+EDIT 
+DELETE /delete?type=alternative&id=gd324lkmlgfd  

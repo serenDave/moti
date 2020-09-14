@@ -1,0 +1,17 @@
+extends base
+
+block content
+    main.main marks
+        div
+            each mark in marks
+                span= mark.idMark
+                |
+                span= mark.idCrit
+                |
+                span= mark.MName
+                |
+                span= mark.MRange
+                |
+                span= mark.NumMark
+                |
+                span= mark.NormMark

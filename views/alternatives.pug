@@ -1,0 +1,10 @@
+extends base
+
+block content
+    main.main
+        each alternative in alternatives
+            div
+                span= alternative.idAlt
+                | 
+                span= alternative.AName
+

@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            link(rel='stylesheet' href='/css/style.css')
+            link(rel='shortcut icon' type='/image/png' href='/img/favicon.png')
+            link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap')
+            title MotiLabs: Laptops choice | #{title}
+
+    body
+        // HEADER
+        include _header
+
+        // CONTENT: That's where all our content of different pages will be injected 
+        block content
+
+        // FOOTER
+        include _footer

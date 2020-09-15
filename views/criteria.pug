@@ -2,18 +2,30 @@ extends base
 
 block content
     main.main
+        part1= "Название критерия"
+        part1= "Тип критерия"
+        part1= "Оптимальность критерия"
+        part1= "Единицы измерения"
+        part1= "Тип шкалы"
+        br
         each criterion in criteria
-            div
-                span= criterion.idCrit
-                | 
+            critCName
                 span= criterion.CName
-                | 
-                span= criterion.CRange
-                | 
+            critCType
                 span= criterion.CType
-                | 
+            critOptimType
                 span= criterion.OptimType
-                | 
+            critEdizmer
                 span= criterion.Edlzmer
-                | 
+            critScaleType
                 span= criterion.ScaleType
+            critNullType
+                null=""
+                    linkCrit
+                        li.nav-item
+                            a.nav-link(href="/") Редактировать
+                        li.nav-item
+                            a.nav-link(href="/") Свойства
+                        li.nav-item
+                            a.nav-link(href="/") Удалить
+                br

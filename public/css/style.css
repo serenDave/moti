@@ -1,3 +1,74 @@
-body {
-    color: orange;
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700italic);
+* { padding: 0; margin: 0; }
+
+header {
+    text-align: justify;
+    height: 75px;
+    padding: 0.6%;
+    background: #2c3e50;
+    color: #fff;
+}
+header li {
+    display: inline-block; 
+}
+header a {
+    color: white;
+    display:inline-block;
+    padding:20px;
+    font-size: 200%;
+    text-decoration: none;
+}
+header a:hover{
+    color: blue;
+}
+
+main altName {
+    color: black;
+    font-size: 100%;
+}
+main li {
+    display: inline-block;
+}
+main linkAlt{
+    position: absolute; left: 40%;
+}
+main h2{
+    padding: 4%;
+}
+main a {
+    color: blue;
+    display:inline-block;
+    padding-left: 20px;
+    font-size: 100%;
+    text-decoration: none;
+}
+main a:active{
+    color: white;
+}
+main a:hover{
+    color: black;
+}
+main div{
+    padding-top: 2%;
+}
+main linkCrit{
+    position: absolute; left: 70%;
+}
+main part1{
+    padding: 2%;
+}
+main critCName{
+    position: absolute; left: 2%;
+}
+main critCType{
+    position: absolute; left: 14.5%;
+}
+main critOptimType{
+    position: absolute; left: 25%;
+}
+main critEdizmer{
+    position: absolute; left: 40%;
+}
+main critScaleType{
+    position: absolute; left: 53%;
 }

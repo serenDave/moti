@@ -2,9 +2,17 @@ extends base
 
 block content
     main.main
-        each alternative in alternatives
-            div
-                span= alternative.idAlt
-                | 
-                span= alternative.AName
-
+        h2 Название алтернативы
+                each alternative in alternatives           
+                    div
+                            altName= alternative.AName
+                                linkAlt   
+                                    hr
+                                    li.nav-item
+                                        a.nav-link(href="/") Редактировать
+                                    li.nav-item
+                                        a.nav-link(href="/") Свойства 
+                                    li.nav-item                              
+                                        a.nav-link(href="/") Удалить
+                                    hr
+                        

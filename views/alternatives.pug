@@ -1,18 +1,15 @@
 extends base
 
 block content
-    main.main
-        h2 Название алтернативы
-                each alternative in alternatives           
-                    div
-                            altName= alternative.AName
-                                linkAlt   
-                                    hr
-                                    li.nav-item
-                                        a.nav-link(href="/") Редактировать
-                                    li.nav-item
-                                        a.nav-link(href="/") Свойства 
-                                    li.nav-item                              
-                                        a.nav-link(href="/") Удалить
-                                    hr
+    h2 Название альтернативы
+    .table.table--big
+        each alternative in alternatives           
+            .table-row
+                .table-cell
+                    h4.table__title= alternative.AName
+                .table__actions   
+                    li.nav-item
+                        a.nav-link(href="/") Редактировать
+                    li.nav-item                              
+                        a.nav-link(href="/") Удалить
                         

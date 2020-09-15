@@ -1,31 +1,33 @@
 extends base
 
 block content
-    main.main
-        part1= "Название критерия"
-        part1= "Тип критерия"
-        part1= "Оптимальность критерия"
-        part1= "Единицы измерения"
-        part1= "Тип шкалы"
-        br
+    h2 Критерии
+    .table
+        .table-row
+            .table-cell
+                p Название критерия
+            .table-cell
+                p Тип критерия
+            .table-cell
+                p Оптимальность критерия
+            .table-cell
+                p Единицы измерения
+            .table-cell
+                p Тип шкалы
         each criterion in criteria
-            critCName
-                span= criterion.CName
-            critCType
-                span= criterion.CType
-            critOptimType
-                span= criterion.OptimType
-            critEdizmer
-                span= criterion.Edlzmer
-            critScaleType
-                span= criterion.ScaleType
-            critNullType
-                null=""
-                    linkCrit
-                        li.nav-item
-                            a.nav-link(href="/") Редактировать
-                        li.nav-item
-                            a.nav-link(href="/") Свойства
-                        li.nav-item
-                            a.nav-link(href="/") Удалить
-                br
+            .table-row
+                .table-cell
+                    p= criterion.CName
+                .table-cell
+                    p= criterion.CType
+                .table-cell
+                    p= criterion.OptimType
+                .table-cell
+                    p= criterion.Edlzmer
+                .table-cell
+                    p= criterion.ScaleType
+                .table__actions
+                    li.nav-item
+                        a.nav-link(href="/") Редактировать
+                    li.nav-item
+                        a.nav-link(href="/") Удалить

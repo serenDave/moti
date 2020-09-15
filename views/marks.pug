@@ -1,17 +1,30 @@
 extends base
 
 block content
-    main.main marks
-        div
-            each mark in marks
-                span= mark.idMark
-                |
-                span= mark.idCrit
-                |
-                span= mark.MName
-                |
-                span= mark.MRange
-                |
-                span= mark.NumMark
-                |
-                span= mark.NormMark
+    h2 Оценки
+    .table
+        .table-row
+            .table-cell
+                p Id оценки
+            .table-cell
+                p Id критерия
+            .table-cell
+                p Наименование оценки
+            .table-cell
+                p Ранг оценки
+            .table-cell
+                p Кол. эквивалент оценки
+            .table-cell
+                p Нормированная оценки
+        each mark in marks
+            .table-row
+                .table-cell
+                    p= mark.idMark
+                .table-cell
+                    p= mark.idCrit
+                .table-cell
+                    p= mark.MName
+                .table-cell
+                    p= mark.MRange
+                .table-cell
+                    p= mark.NumMark || 0

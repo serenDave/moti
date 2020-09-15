@@ -1,74 +1,161 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,700italic);
-* { padding: 0; margin: 0; }
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+* { 
+    padding: 0; 
+    margin: 0;
+    box-sizing: inherit;
+}
 
 header {
-    text-align: justify;
-    height: 75px;
-    padding: 0.6%;
+    height: 8rem;
+    padding: 2rem;
     background: #2c3e50;
     color: #fff;
-}
-header li {
-    display: inline-block; 
-}
-header a {
-    color: white;
-    display:inline-block;
-    padding:20px;
-    font-size: 200%;
-    text-decoration: none;
-}
-header a:hover{
-    color: blue;
+    display: flex;
+    align-items: center;
 }
 
-main altName {
-    color: black;
-    font-size: 100%;
+header .nav-items {
+    display: flex;
+    list-style: none;
 }
+
+header .nav-item {
+    padding: 0 1.5rem;
+    font-size: 2.2rem;
+}
+
+header .nav-link {
+    color: inherit;
+    text-decoration: none;
+    transition: all .2s;
+}
+
+.footer {
+    height: 6rem;
+}
+
+header .nav-link:hover{
+    color: orange;
+}
+
+main {
+    color: #000;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    min-height: 80vh;
+}
+
+.main-title {
+    padding: 3rem;
+    background-color: #ddd;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.tables-overview {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.overview {
+    padding: 1rem;
+    font-size: 1.8rem;
+}
+
+.overview__heading {
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.overview__link {
+    color: inherit;
+    font-size: 1.4rem;
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.table {
+    display: table;
+    font-size: 1.6rem;
+}
+
+.table--big {
+    font-size: 1.8rem;
+}
+
+.table div {
+    margin-right: 2rem;
+    padding: 1rem;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-row:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.table-row:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.table-row > div {
+    display: table-cell;
+}
+
+.table-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.table__title {
+    font-weight: 700;
+    flex: 1;
+}
+
+.table__actions {
+    display: flex;
+}
+
 main li {
     display: inline-block;
 }
-main linkAlt{
-    position: absolute; left: 40%;
-}
-main h2{
-    padding: 4%;
-}
+
 main a {
     color: blue;
-    display:inline-block;
+    display: inline-block;
     padding-left: 20px;
     font-size: 100%;
     text-decoration: none;
 }
+
 main a:active{
     color: white;
 }
+
 main a:hover{
     color: black;
-}
-main div{
-    padding-top: 2%;
-}
-main linkCrit{
-    position: absolute; left: 70%;
-}
-main part1{
-    padding: 2%;
-}
-main critCName{
-    position: absolute; left: 2%;
-}
-main critCType{
-    position: absolute; left: 14.5%;
-}
-main critOptimType{
-    position: absolute; left: 25%;
-}
-main critEdizmer{
-    position: absolute; left: 40%;
-}
-main critScaleType{
-    position: absolute; left: 53%;
 }

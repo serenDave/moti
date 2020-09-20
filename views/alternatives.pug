@@ -2,6 +2,9 @@ extends base
 
 block content
     h2 Название альтернативы
+    form.form(action="#")
+        input(type="text", name="name" placeholder="Enter the name of an alternative")
+        input(type="submit" value="Add" class="add-btn")
     .table.table--big
         each alternative in alternatives           
             .table-row
@@ -11,5 +14,26 @@ block content
                     li.nav-item
                         a.nav-link(href="/") Редактировать
                     li.nav-item                              
-                        a.nav-link(href="/") Удалить
-                        
+                        a.nav-link(href="/" onclick=`removeItem(event, ${alternative.idAlt})`) Удалить
+
+block script
+    script.
+        const submitBtn = document.querySelector('.add-btn');
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const altName = document.querySelector('input[type="text"]').value;
+
+            const rawResponse = await fetch('/db/add/alternative', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: altName })
+            });
+            const content = await rawResponse.json();
+            console.log(content);
+
+            location.reload();
+        });

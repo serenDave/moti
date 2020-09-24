@@ -1,10 +1,28 @@
 extends base
 
 block content
-    main.main
-        each alternative in alternatives
-            div
-                span= alternative.idAlt
-                | 
-                span= alternative.AName
+    h2 Название альтернативы
+    form.form.form__alternative(action="#")
+        input(type="text", name="name" placeholder="Enter the name of an alternative" id="alt-name")
+        input(type="submit" value="Add" class="add-btn")
+    .table.table--big
+        each alternative in alternatives           
+            .table-row
+                .table-cell
+                    h4.table__title= alternative.AName
+                .table__actions   
+                    li.nav-item
+                        a.nav-link(href="/") Редактировать
+                    li.nav-item                              
+                        a.nav-link(href="#" onclick=`removeItem(event, "alternative", ${alternative.idAlt})`) Удалить
 
+block script
+    script.
+        const submitBtn = document.querySelector('.add-btn');
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const AName = document.querySelector('input[type="text"]').value;
+
+            addItem('alternative', { AName });
+        });

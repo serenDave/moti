@@ -14,7 +14,38 @@ html
         include _header
 
         // CONTENT: That's where all our content of different pages will be injected 
-        block content
+        main.main
+            block content
 
         // FOOTER
         include _footer
+
+        script.
+            async function addItem(itemType, data) {
+                const rawResponse = await fetch(`/db/add/${itemType}`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                location.reload();
+            }
+
+            async function removeItem(event, itemType, itemId) {
+                event.preventDefault();
+
+                const rawResponse = await fetch(`/db/remove/${itemType}/${itemId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                location.reload();
+            }
+        block script
+            

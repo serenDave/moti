@@ -1,19 +1,70 @@
 extends base
 
 block content
-    main.main
+    h2 Критерии
+    form.form(action="#")
+        .form__input
+            input(type="text", name="name" placeholder="Введите название")
+            input(type="text", name="unit" placeholder="Введите единицы измерения")
+            select(name="ctype")
+                option(value="quantitative") Количественный
+                option(value="qualitative") Качественный
+            select(name="opt-type")
+                option(value="min") Минимум
+                option(value="max") Максимум
+            select(name="scale-type")
+                option(value="relation") Шкала отношений
+                option(value="ordinal") Шкала порядковая
+                option(value="named") Шкала наименований
+        input(type="submit" value="Add" class="add-btn")
+
+    .table
+        .table-row
+            .table-cell
+                p Название критерия
+            .table-cell
+                p Тип критерия
+            .table-cell
+                p Оптимальность критерия
+            .table-cell
+                p Единицы измерения
+            .table-cell
+                p Тип шкалы
         each criterion in criteria
-            div
-                span= criterion.idCrit
-                | 
-                span= criterion.CName
-                | 
-                span= criterion.CRange
-                | 
-                span= criterion.CType
-                | 
-                span= criterion.OptimType
-                | 
-                span= criterion.Edlzmer
-                | 
-                span= criterion.ScaleType
+            .table-row
+                .table-cell
+                    p= criterion.CName
+                .table-cell
+                    p= criterion.CType
+                .table-cell
+                    p= criterion.OptimType
+                .table-cell
+                    p= criterion.Edlzmer
+                .table-cell
+                    p= criterion.ScaleType
+                .table__actions
+                    li.nav-item
+                        a.nav-link(href="/") Редактировать
+                    li.nav-item
+                        a.nav-link(href="#" onclick=`removeItem(event, "criterion", ${criterion.idCrit})`) Удалить
+
+block script
+    script.
+        const submitBtn = document.querySelector('.add-btn');
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const CName = document.querySelector('input[name="name"]').value;
+            const Unit = document.querySelector('input[name="unit"]').value;
+            const CType = document.querySelector('select[name="ctype"]').value;
+            const OptimType = document.querySelector('select[name="opt-type"]').value;
+            const ScaleType = document.querySelector('select[name="scale-type"]').value;
+
+            addItem('criterion', {
+                CName,
+                CType,
+                OptimType,
+                ScaleType,
+                Edlzmer: Unit
+            });
+        });

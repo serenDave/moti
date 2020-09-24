@@ -3,12 +3,14 @@ const express = require('express');
 const morgan = require('morgan');
 
 const viewsRouter = require('./routes/viewRoutes');
+const dbActionsRouter = require('./routes/dbActionsRoutes');
 
 // Start new app
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true }));
 
 // Setting templating engine
 app.set('view engine', 'pug');
@@ -18,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Setting routes
+app.use('/db', dbActionsRouter);
 app.use('/', viewsRouter);
 
 // Error catching middleware

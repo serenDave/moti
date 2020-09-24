@@ -12,8 +12,10 @@ exports.add = async (req, res, next) => {
             break;
         case 'criterion':
             queryStr = 'INSERT INTO Сriterion SET ?';
+            break;
         case 'mark':
             queryStr = 'INSERT INTO Mark SET ?';
+            break;
         default:
             break;
     }

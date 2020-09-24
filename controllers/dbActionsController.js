@@ -1,4 +1,3 @@
-const { query } = require('../dbConnection');
 const pool = require('../dbConnection');
 
 let queryStr;
@@ -9,13 +8,23 @@ exports.add = async (req, res, next) => {
 
     switch (type) {
         case 'alternative':
-            queryStr = 'INSERT INTO Alternative (AName) VALUES (?)';
+            queryStr = 'INSERT INTO Alternative SET ?';
             break;
+        case 'criterion':
+            queryStr = 'INSERT INTO Сriterion SET ?';
+        case 'mark':
+            queryStr = 'INSERT INTO Mark SET ?';
         default:
             break;
     }
 
-    const result = await pool.query(queryStr, [req.body.name]);  
+    let result;
+
+    try {
+        result = await pool.query(queryStr, req.body);  
+    } catch (e) {
+        console.log(e);
+    }
 
     res.status(200).json({
         status: 'success',
@@ -40,11 +49,21 @@ exports.remove = async (req, res, next) => {
         case 'alternative':
             queryStr = 'DELETE FROM Alternative WHERE idAlt = ?';
             break;
+        case 'criterion':
+            queryStr = 'DELETE FROM Сriterion WHERE idCrit = ?';
+        case 'mark':
+            queryStr = 'DELETE FROM Mark WHERE idMark = ?';
         default:
             break;
     }
 
-    const result = pool.query(queryStr, [id]);
+    let result;
+
+    try {
+        result = await pool.query(queryStr, [+id]);
+    } catch (e) {
+        console.log(e);
+    }
 
     res.status(200).json({
         status: 'success',

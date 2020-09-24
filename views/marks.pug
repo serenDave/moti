@@ -2,6 +2,14 @@ extends base
 
 block content
     h2 Оценки
+    form.form(action="#")
+        .form__input
+            input(type="text", name="id-crit" placeholder="Id критерия")
+            input(type="text", name="mname" placeholder="Наименование оценки")
+            input(type="text", name="mrange" placeholder="Ранг оценки")
+            input(type="text", name="num-mark" placeholder="Кол.эквивалент оценки")
+            input(type="text", name="norm-mark" placeholder="Нормированная")
+        input(type="submit" value="Add" class="add-btn")
     .table
         .table-row
             .table-cell
@@ -27,4 +35,32 @@ block content
                 .table-cell
                     p= mark.MRange
                 .table-cell
-                    p= mark.NumMark || 0
+                    p= mark.NumMark
+                .table-cell
+                    p= mark.NormMark 
+                .table__actions
+                    li.nav-item
+                        a.nav-link(href="/") Редактировать
+                    li.nav-item
+                        a.nav-link(href="#" onclick=`removeItem(event, "mark", ${mark.idMark})`) Удалить
+
+block script
+    script.
+        const submitBtn = document.querySelector('.add-btn');
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const idCrit = document.querySelector('input[name="id-crit"]').value;
+            const MName = document.querySelector('input[name="mname"]').value;
+            const MRange = document.querySelector('input[name="mrange"]').value;
+            const NumMark = document.querySelector('input[name="num-mark"]').value;
+            const NormMark = document.querySelector('input[name="norm-mark"]').value;
+
+            addItem('mark', {
+                idCrit,
+                MName,
+                MRange,
+                NumMark,
+                NormMark
+            });
+        });

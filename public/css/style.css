@@ -159,3 +159,43 @@ main a:active{
 main a:hover{
     color: black;
 }
+
+.form {
+    padding: 1rem;
+    margin: 2rem 0;
+    border: 1px solid #212121;
+    border-radius: 5px;
+    max-width: 70rem;
+}
+
+.form__alternative {
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__alternative input[type="text"] {
+    margin-bottom: 1rem;
+}
+
+.form__input {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+input, select, option {
+    width: 100%;
+    display: block;
+    font-family: inherit;
+    padding: .5rem 1rem;
+    font-size: 2rem;
+    color: #000;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    width: 15rem;
+}

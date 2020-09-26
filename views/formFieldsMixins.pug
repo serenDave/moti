@@ -1,0 +1,51 @@
+mixin alternative(name, detailed)
+    if detailed 
+        p Название альтертанивы
+    input(
+        type="text", 
+        name="name" 
+        placeholder="Введите название альтернативы" 
+        id="alt-name" 
+        value=`${name || ''}`
+    )
+
+mixin criterion(name, unit, ctype, optType, scaleType, detailed)
+    if (detailed)
+        p Название критерия
+    input(type="text", name="name" placeholder="Введите название" value=`${name || ''}`)
+    if (detailed)
+        p Единицы измерения
+    input(type="text", name="unit" placeholder="Введите единицы измерения" value=`${unit || ''}`)
+    if (detailed)
+        p Тип критерия
+    select(name="ctype" value=`${ctype || ''}`)
+        option(value="quantitative") Количественный
+        option(value="qualitative") Качественный
+    if (detailed)
+        p Оптимальность критерия
+    select(name="opt-type" value=`${optType || ''}`)
+        option(value="min") Минимум
+        option(value="max") Максимум
+    if (detailed)
+        p Тип шкалы
+    select(name="scale-type" value=`${scaleType || ''}`)
+        option(value="relation") Шкала отношений
+        option(value="ordinal") Шкала порядковая
+        option(value="named") Шкала наименований
+
+mixin mark(idCrit, mname, mrange, numMark, normMark, detailed)
+    if detailed
+        p Id критерия
+    input(type="text", name="id-crit" placeholder="Id критерия" value=`${idCrit || ''}`)
+    if detailed
+        p Наименование оценки
+    input(type="text", name="mname" placeholder="Наименование оценки" value=`${mname || ''}`)
+    if detailed
+        p Ранг оценки
+    input(type="text", name="mrange" placeholder="Ранг оценки" value=`${mrange || ''}`)
+    if detailed
+        p Кол. эквивалент оценки
+    input(type="text", name="num-mark" placeholder="Кол.эквивалент оценки" value=`${numMark || ''}`)
+    if detailed
+        p Нормированная оценки
+    input(type="text", name="norm-mark" placeholder="Нормированная" value=`${normMark || ''}`)

@@ -4,11 +4,7 @@ block content
     h2 Оценки
     form.form(action="#")
         .form__input
-            input(type="text", name="id-crit" placeholder="Id критерия")
-            input(type="text", name="mname" placeholder="Наименование оценки")
-            input(type="text", name="mrange" placeholder="Ранг оценки")
-            input(type="text", name="num-mark" placeholder="Кол.эквивалент оценки")
-            input(type="text", name="norm-mark" placeholder="Нормированная")
+            +mark
         input(type="submit" value="Add" class="add-btn")
     .table
         .table-row
@@ -40,7 +36,7 @@ block content
                     p= mark.NormMark 
                 .table__actions
                     li.nav-item
-                        a.nav-link(href="/") Редактировать
+                        a.nav-link(href=`/editView/mark/${mark.idMark}`) Редактировать
                     li.nav-item
                         a.nav-link(href="#" onclick=`removeItem(event, "mark", ${mark.idMark})`) Удалить
 

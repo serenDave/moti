@@ -1,0 +1,12 @@
+extends base
+
+block content
+    form.form
+        .form__input--column
+            case type
+                when "alternative"
+                    +alternative(AName, true)
+                when "criterion"
+                    +criterion(CName, Edlzmer, CType, optimType, ScaleType, true)
+                when "mark"
+                    +mark(idCrit, MName, MRange, NumMark, NormMark, true)

@@ -4,19 +4,8 @@ block content
     h2 Критерии
     form.form(action="#")
         .form__input
-            input(type="text", name="name" placeholder="Введите название")
-            input(type="text", name="unit" placeholder="Введите единицы измерения")
-            select(name="ctype")
-                option(value="quantitative") Количественный
-                option(value="qualitative") Качественный
-            select(name="opt-type")
-                option(value="min") Минимум
-                option(value="max") Максимум
-            select(name="scale-type")
-                option(value="relation") Шкала отношений
-                option(value="ordinal") Шкала порядковая
-                option(value="named") Шкала наименований
-        input(type="submit" value="Add" class="add-btn")
+           +criterion
+        input(type="submit" value="Добавить" class="add-btn")
 
     .table
         .table-row
@@ -30,6 +19,8 @@ block content
                 p Единицы измерения
             .table-cell
                 p Тип шкалы
+            .table-cell
+                div 
         each criterion in criteria
             .table-row
                 .table-cell
@@ -44,7 +35,7 @@ block content
                     p= criterion.ScaleType
                 .table__actions
                     li.nav-item
-                        a.nav-link(href="/") Редактировать
+                        a.nav-link(href=`/editView/criterion/${criterion.idCrit}`) Редактировать
                     li.nav-item
                         a.nav-link(href="#" onclick=`removeItem(event, "criterion", ${criterion.idCrit})`) Удалить
 

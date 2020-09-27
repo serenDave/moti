@@ -1,0 +1,53 @@
+mixin alternative(name, detailed)
+    if detailed 
+        p Название альтертанивы
+    input(
+        type="text", 
+        name="name" 
+        placeholder="Введите название альтернативы" 
+        id="alt-name" 
+        value=`${name || ''}`
+    )
+
+mixin criterion(name, unit, ctype, optType, scaleType, detailed)
+    if (detailed)
+        p Название критерия
+    input(type="text", name="name" placeholder="Введите название" value=`${name || ''}`)
+    if (detailed)
+        p Единицы измерения
+    input(type="text", name="unit" placeholder="Введите единицы измерения" value=`${unit || ''}`)
+    if (detailed)
+        p Тип критерия
+    select(name="ctype" value=`${ctype || ''}`)
+        option(value="количественный") Количественный
+        option(value="качественный") Качественный
+    if (detailed)
+        p Оптимальность критерия
+    select(name="opt-type" value=`${optType || ''}`)
+        option(value="минимум") Минимум
+        option(value="максимум") Максимум
+    if (detailed)
+        p Тип шкалы
+    select(name="scale-type" value=`${scaleType || ''}`)
+        option(value="шкала отношений") Шкала отношений
+        option(value="шкала порядковая") Шкала порядковая
+        option(value="шкала наименований") Шкала наименований
+
+mixin mark(idCrit, mname, mrange, numMark, normMark, detailed)
+    - let defaultIntField = ''
+    if detailed
+        p Id критерия
+        - defaultIntField = 0
+    input(type="text", name="id-crit" placeholder="Id критерия" value=`${idCrit || ''}`)
+    if detailed
+        p Наименование оценки
+    input(type="text", name="mname" placeholder="Наименование оценки" value=`${mname || ''}`)
+    if detailed
+        p Ранг оценки
+    input(type="text", name="mrange" placeholder="Ранг оценки" value=`${mrange || defaultIntField}`)
+    if detailed
+        p Кол. эквивалент оценки
+    input(type="text", name="num-mark" placeholder="Кол.эквивалент оценки" value=`${numMark || defaultIntField}`)
+    if detailed
+        p Нормированная оценки
+    input(type="text", name="norm-mark" placeholder="Нормированная" value=`${normMark || defaultIntField}`)

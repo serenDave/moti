@@ -185,6 +185,12 @@ main a:hover{
     margin-bottom: 1rem;
 }
 
+.form__input--column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
 input, select, option {
     width: 100%;
     display: block;
@@ -198,4 +204,8 @@ input[type="submit"] {
     display: block;
     margin: 0 auto;
     width: 15rem;
+}
+
+#add-alt {
+    margin: 0;
 }

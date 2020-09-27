@@ -3,8 +3,8 @@ extends base
 block content
     h2 Название альтернативы
     form.form.form__alternative(action="#")
-        input(type="text", name="name" placeholder="Enter the name of an alternative" id="alt-name")
-        input(type="submit" value="Add" class="add-btn")
+        +alternative
+        input(type="submit" value="Добавить" class="add-btn" id="add-alt")
     .table.table--big
         each alternative in alternatives           
             .table-row
@@ -12,7 +12,7 @@ block content
                     h4.table__title= alternative.AName
                 .table__actions   
                     li.nav-item
-                        a.nav-link(href="/") Редактировать
+                        a.nav-link(href=`/editView/alternative/${alternative.idAlt}`) Редактировать
                     li.nav-item                              
                         a.nav-link(href="#" onclick=`removeItem(event, "alternative", ${alternative.idAlt})`) Удалить
 

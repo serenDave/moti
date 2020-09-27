@@ -35,11 +35,32 @@ exports.add = async (req, res, next) => {
 };
 
 exports.edit = async (req, res, next) => {
-    console.log(req);
+    
+    const { type, id } = req.params;
+
+    switch (type) {
+        case 'alternative':
+            queryStr = 'UPDATE Alternative SET ? WHERE idAlt = ?';
+            break;
+        case 'criterion':
+            queryStr = 'UPDATE Сriterion SET ? WHERE idCrit = ?';
+            break;
+        case 'mark':
+            queryStr = 'UPDATE Mark SET ? WHERE idMark = ?';
+            break;
+        default:
+            break;
+    }
+
+    try {
+        result = await pool.query(queryStr, [req.body, id]);
+    } catch (e) {
+        console.log(e);
+    }
 
     res.status(200).json({
         status: 'success',
-        message: 'edited successfully'
+        message: result.message,
     });
 };
 
@@ -53,8 +74,10 @@ exports.remove = async (req, res, next) => {
             break;
         case 'criterion':
             queryStr = 'DELETE FROM Сriterion WHERE idCrit = ?';
+            break;
         case 'mark':
             queryStr = 'DELETE FROM Mark WHERE idMark = ?';
+            break;
         default:
             break;
     }

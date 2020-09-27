@@ -1,0 +1,54 @@
+extends base
+
+block content
+    - let id
+    form.form
+        .form__input--column
+            case type
+                when "alternative"
+                    +alternative(AName, true)
+                    - id = idAlt
+                when "criterion"
+                    +criterion(CName, Edlzmer, CType, optimType, ScaleType, true)
+                    - id = idCrit
+                when "mark"
+                    +mark(idCrit, MName, MRange, NumMark, NormMark, true)
+                    - id = idMark
+        input(type='submit' id='btn-edit' class='add-btn' value="Изменить")
+
+    block script
+        script.
+            const itemType = "#{type}";
+            const itemId = "#{id}";
+            const editButton = document.querySelector('#btn-edit');
+            editButton.addEventListener('click', e => {
+                e.preventDefault();
+
+                const data = {};
+
+                switch (itemType) {
+                    case 'alternative':
+                        data.AName = document.querySelector('[name="name"]').value;
+                        break;
+                    case 'criterion':
+                        data.CName = document.querySelector('[name="name"]').value;
+                        data.Edlzmer = document.querySelector('[name="unit"]').value;
+                        data.CType = document.querySelector('[name="ctype"]').value;
+                        data.OptimType = document.querySelector('[name="opt-type"]').value; 
+                        data.ScaleType = document.querySelector('[name="scale-type"]').value;
+                        break;
+                    case 'mark':
+                        data.idCrit = document.querySelector('[name="id-crit"]').value;
+                        data.MName = document.querySelector('[name="mname"]').value;
+                        data.MRange = document.querySelector('[name="mrange"]').value;
+                        data.NumMark = document.querySelector('[name="num-mark"]').value;
+                        data.NormMark = document.querySelector('[name="norm-mark"]').value;
+                        break;
+                    default:
+                        break;
+                }
+
+                editItem(itemType, itemId, data);
+            });
+
+

@@ -10,5 +10,6 @@ router.get('/marks', viewsController.getMarks);
 router.get('/results', viewsController.getResults);
 router.get('/vectors', viewsController.getVectors);
 router.get('/lprs', viewsController.getLPRS);
+router.get('/editView/:type/:id', viewsController.getEditView);
 
 module.exports = router;

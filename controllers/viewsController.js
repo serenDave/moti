@@ -62,3 +62,27 @@ exports.getLPRS = (req, res, next) => {
         title: 'LPRs'
     });
 };
+
+exports.getEditView = async (req, res, next) => {
+    const { type, id } = req.params;
+
+    let queryStr;
+
+    switch (type) {
+        case 'alternative':
+            queryStr = 'SELECT * FROM Alternative WHERE idAlt = ?';
+            break;
+        case 'criterion':
+            queryStr = 'SELECT * FROM Сriterion WHERE idCrit = ?';
+            break;
+        case 'mark':
+            queryStr = 'SELECT * FROM Mark WHERE idMark = ?';
+            break;
+        default:
+            break;
+    }
+
+    const result = await executeQuery(queryStr, id);
+
+    res.status(200).render('editView', { type, ...result[0] });
+};

@@ -5,7 +5,7 @@ block content
     form.form(action="#")
         .form__input
             +mark
-        input(type="submit" value="Add" class="add-btn")
+        input(type="submit" value="Добавить" class="add-btn")
     .table
         .table-row
             .table-cell
@@ -20,6 +20,8 @@ block content
                 p Кол. эквивалент оценки
             .table-cell
                 p Нормированная оценки
+            .table-cell
+                div 
         each mark in marks
             .table-row
                 .table-cell

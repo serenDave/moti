@@ -5,7 +5,7 @@ block content
     form.form(action="#")
         .form__input
            +criterion
-        input(type="submit" value="Add" class="add-btn")
+        input(type="submit" value="Добавить" class="add-btn")
 
     .table
         .table-row
@@ -19,6 +19,8 @@ block content
                 p Единицы измерения
             .table-cell
                 p Тип шкалы
+            .table-cell
+                div 
         each criterion in criteria
             .table-row
                 .table-cell

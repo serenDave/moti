@@ -9,11 +9,9 @@ block content
     .table
         .table-row
             .table-cell
-                p Id оценки
+                p Название оценки
             .table-cell
-                p Id критерия
-            .table-cell
-                p Наименование оценки
+                p Значение оценки
             .table-cell
                 p Ранг оценки
             .table-cell
@@ -25,9 +23,7 @@ block content
         each mark in marks
             .table-row
                 .table-cell
-                    p= mark.idMark
-                .table-cell
-                    p= mark.idCrit
+                    p= mark.CName
                 .table-cell
                     p= mark.MName
                 .table-cell

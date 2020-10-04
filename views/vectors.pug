@@ -1,4 +1,18 @@
 extends base
 
 block content
-    h1 vectors
+    h2 Векторы
+
+    .vectors-tables
+        each vector in vectors
+            .table.table-vector
+                h3= vector.name
+                each value in vector.values
+                    .table-row
+                        .table-cell
+                            p= value.CName
+                        .table-cell
+                            p= value.MName
+                
+                    
+            

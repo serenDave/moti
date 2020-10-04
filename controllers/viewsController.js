@@ -32,7 +32,7 @@ exports.getCriteria = async (req, res, next) => {
 
 exports.getMarks = async (req, res, next) => {
 
-    const marks = await executeQuery('SELECT * FROM Mark');
+    const marks = await executeQuery('SELECT CName, MName, MRange, NumMark, NormMark FROM Mark INNER JOIN Сriterion ON Mark.idCrit = Сriterion.idCrit');
 
     res.status(200).render('marks', {
         title: 'Marks',
@@ -51,9 +51,44 @@ exports.getResults = async (req, res, next) => {
     });
 };
 
-exports.getVectors = (req, res, next) => {
+exports.getVectors = async (req, res, next) => {
+
+    const query = `
+        SELECT A.idAlt, A.AName, C.CName, M.MName 
+        FROM Alternative A, Vector V, Mark M, Сriterion C 
+        WHERE A.idAlt = V.idAlt AND M.idMark = V.idMark AND C.idCrit = M.idCrit
+        ORDER BY idAlt ASC;
+    `;
+
+    const results = await executeQuery(query);
+
+    const vectors = {};
+
+    results.forEach(result => {
+
+        let valuesObj = { CName: result.CName, MName: result.MName };
+
+        if (!vectors[result.idAlt]) {
+            vectors[result.idAlt] = {
+                name: result.AName,
+                values: [valuesObj]
+            };
+        } else {
+            vectors[result.idAlt].values.push(valuesObj);
+        }
+    });
+
+    for (const vector in vectors) {
+        vectors[vector].values.sort((a, b) => {
+            if (a.CName < b.CName) return -1;
+            if (a.CName > b.CName) return 1;
+            return 0;
+        });
+    }
+
     res.status(200).render('vectors', {
-        title: 'Vectors'
+        title: 'Vectors',
+        vectors
     });
 };
 

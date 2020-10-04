@@ -70,6 +70,10 @@ h2 {
     margin-bottom: 2rem;
 }
 
+h3 {
+    width: 150%;
+}
+
 .tables-overview {
     padding: 2rem;
     display: grid;
@@ -97,7 +101,24 @@ h2 {
 
 .table {
     display: table;
+    margin-bottom: 2rem;
     font-size: 1.6rem;
+}
+
+.table-vector {
+    border: 1px solid #212121;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.vectors-tables {
+    display: grid;
+    grid-template-columns: 65rem 65rem;
+    align-items: start;
+}
+
+.vectors-tables > * {
+    margin-right: 2rem;
 }
 
 .table--big {

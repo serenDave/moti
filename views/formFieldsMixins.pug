@@ -33,12 +33,19 @@ mixin criterion(name, unit, ctype, optType, scaleType, detailed)
         option(value="шкала порядковая") Шкала порядковая
         option(value="шкала наименований") Шкала наименований
 
-mixin mark(idCrit, mname, mrange, numMark, normMark, detailed)
+mixin mark(critNames, chosenCritId, mname, mrange, numMark, normMark, detailed)
     - let defaultIntField = ''
     if detailed
-        p Id критерия
+        p Название критерия
         - defaultIntField = 0
-    input(type="text", name="id-crit" placeholder="Id критерия" value=`${idCrit || ''}`)
+    select(name="crit-id")
+        if (!chosenCritId)
+            option(value="" selected disabled hidden) Название критерия 
+        each critName in critNames
+            if (critName.idCrit === chosenCritId)
+                option(value=`${critName.idCrit}` selected)= critName.CName
+            else 
+                option(value=`${critName.idCrit}`)= critName.CName
     if detailed
         p Наименование оценки
     input(type="text", name="mname" placeholder="Наименование оценки" value=`${mname || ''}`)

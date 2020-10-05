@@ -32,11 +32,16 @@ exports.getCriteria = async (req, res, next) => {
 
 exports.getMarks = async (req, res, next) => {
 
-    const marks = await executeQuery('SELECT CName, MName, MRange, NumMark, NormMark FROM Mark INNER JOIN Сriterion ON Mark.idCrit = Сriterion.idCrit');
+    const marks = await executeQuery(
+        'SELECT CName, MName, idMark, MRange, NumMark, NormMark FROM Mark INNER JOIN Сriterion ON Mark.idCrit = Сriterion.idCrit',
+    );
+
+    const critNames = await executeQuery('SELECT idCrit, CName FROM Сriterion');
 
     res.status(200).render('marks', {
         title: 'Marks',
-        marks
+        marks,
+        critNames
     });
 };
 
@@ -102,6 +107,7 @@ exports.getEditView = async (req, res, next) => {
     const { type, id } = req.params;
 
     let queryStr;
+    let addCritNames = false;
 
     switch (type) {
         case 'alternative':
@@ -111,13 +117,21 @@ exports.getEditView = async (req, res, next) => {
             queryStr = 'SELECT * FROM Сriterion WHERE idCrit = ?';
             break;
         case 'mark':
-            queryStr = 'SELECT * FROM Mark WHERE idMark = ?';
+            queryStr = `SELECT * FROM Mark M INNER JOIN Сriterion C 
+                        ON M.idCrit = C.idCrit 
+                        WHERE M.idMark = ?`;
+            addCritNames = true;
             break;
         default:
             break;
     }
 
     const result = await executeQuery(queryStr, id);
+    const resultObj = { type, ...result[0] };
 
-    res.status(200).render('editView', { type, ...result[0] });
+    if (addCritNames) {
+        resultObj.critNames = await executeQuery('SELECT idCrit, CName FROM Сriterion');
+    }
+
+    res.status(200).render('editView', resultObj);
 };

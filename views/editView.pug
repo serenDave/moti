@@ -12,7 +12,7 @@ block content
                     +criterion(CName, Edlzmer, CType, optimType, ScaleType, true)
                     - id = idCrit
                 when "mark"
-                    +mark(idCrit, MName, MRange, NumMark, NormMark, true)
+                    +mark(critNames, idCrit, MName, MRange, NumMark, NormMark, true)
                     - id = idMark
         input(type='submit' id='btn-edit' class='add-btn' value="Изменить")
 
@@ -38,7 +38,7 @@ block content
                         data.ScaleType = document.querySelector('[name="scale-type"]').value;
                         break;
                     case 'mark':
-                        data.idCrit = document.querySelector('[name="id-crit"]').value;
+                        data.idCrit = document.querySelector('[name="crit-id"]').value;
                         data.MName = document.querySelector('[name="mname"]').value;
                         data.MRange = document.querySelector('[name="mrange"]').value;
                         data.NumMark = document.querySelector('[name="num-mark"]').value;

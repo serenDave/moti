@@ -1,8 +1,4 @@
-const pool = require('../dbConnection');
-
-const executeQuery = async (queryStr, params) => {
-    return pool.query(queryStr, params);
-};
+const { executeQuery, getAndFormatVectors } = require('../utils/utils');
 
 exports.getHomepage = (req, res, next) => {
     res.status(200).render('home', {
@@ -58,30 +54,7 @@ exports.getResults = async (req, res, next) => {
 
 exports.getVectors = async (req, res, next) => {
 
-    const query = `
-        SELECT A.idAlt, A.AName, C.CName, M.MName 
-        FROM Alternative A, Vector V, Mark M, Сriterion C 
-        WHERE A.idAlt = V.idAlt AND M.idMark = V.idMark AND C.idCrit = M.idCrit
-        ORDER BY idAlt ASC;
-    `;
-
-    const results = await executeQuery(query);
-
-    const vectors = {};
-
-    results.forEach(result => {
-
-        let valuesObj = { CName: result.CName, MName: result.MName };
-
-        if (!vectors[result.idAlt]) {
-            vectors[result.idAlt] = {
-                name: result.AName,
-                values: [valuesObj]
-            };
-        } else {
-            vectors[result.idAlt].values.push(valuesObj);
-        }
-    });
+    const vectors = await getAndFormatVectors();
 
     for (const vector in vectors) {
         vectors[vector].values.sort((a, b) => {

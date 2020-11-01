@@ -5,6 +5,10 @@ const morgan = require('morgan');
 const viewsRouter = require('./routes/viewRoutes');
 const dbActionsRouter = require('./routes/dbActionsRoutes');
 
+const { comparePareto, linearAdditionalConvolution } = require('./controllers/calculationController');
+
+linearAdditionalConvolution();
+
 // Start new app
 const app = express();
 

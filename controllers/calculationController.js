@@ -49,4 +49,17 @@ exports.linearAdditionalConvolution = async () => {
         // save it to factors
         normalizedFactors[i] = 1 / sum;
     }
+
+    for (let i = 0; i < vectors.length; i++) {
+        const vector = vectors[i];
+        let sum = 0;
+
+        for (let j = 0; j < valuesLength; j++) {
+            sum += vector.values[j].NormMark * normalizedFactors[j]
+        }
+
+        vector.convolutionResult = sum;
+    }
+
+    return vectors;
 };

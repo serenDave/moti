@@ -1,0 +1,61 @@
+extends base
+
+block content
+    h2 Отметьте главный критерий слева от названия
+    h3 Установите ограничения для всех критериев, кроме главного
+    form.form(action="#")
+        .form__input
+            +mark(critNames)
+        input(type="submit" value="Добавить" class="add-btn")
+    .table
+        .table-row
+            .table-cell 
+                p Название оценки
+            .table-cell
+                p Значение оценки
+            .table-cell
+                p Ранг оценки
+            .table-cell
+                p Кол. эквивалент оценки
+            .table-cell
+                p Нормированная оценки
+            .table-cell
+                div 
+        each mark in marks
+            .table-row
+                .table-cell
+                    p= mark.CName
+                .table-cell
+                    p= mark.MName
+                .table-cell
+                    p= mark.MRange
+                .table-cell
+                    p= mark.NumMark
+                .table-cell
+                    p= mark.NormMark 
+                .table__actions
+                    li.nav-item
+                        a.nav-link(href=`/editView/mark/${mark.idMark}`) Редактировать
+                    li.nav-item
+                        a.nav-link(href="#" onclick=`removeItem(event, "mark", ${mark.idMark})`) Удалить
+
+block script
+    script.
+        const submitBtn = document.querySelector('.add-btn');
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const idCrit = document.querySelector('select[name="crit-id"]').value;
+            const MName = document.querySelector('input[name="mname"]').value;
+            const MRange = document.querySelector('input[name="mrange"]').value;
+            const NumMark = document.querySelector('input[name="num-mark"]').value;
+            const NormMark = document.querySelector('input[name="norm-mark"]').value;
+
+            addItem('mark', {
+                idCrit,
+                MName,
+                MRange,
+                NumMark,
+                NormMark
+            });
+        });

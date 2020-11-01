@@ -75,6 +75,11 @@ exports.getLPRS = (req, res, next) => {
         title: 'LPRs'
     });
 };
+exports.getChooseNameCriteria = (req, res, next) => {
+    res.status(200).render('chooseNameCriteria', {
+        title: 'choose'
+    });
+};
 
 exports.getEditView = async (req, res, next) => {
     const { type, id } = req.params;

@@ -4,6 +4,9 @@ exports.comparePareto = async () => {
     let vectors = await getAndFormatVectors();
 
     // converting it into an array for easier calculation
+    Object.keys(vectors).forEach((id) => {
+        vectors[id].id = id;
+    });
     vectors = Object.values(vectors);
 
     for (let i = 0; i < vectors.length; i++) {

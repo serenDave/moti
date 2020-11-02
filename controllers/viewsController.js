@@ -1,4 +1,5 @@
 const { executeQuery, getAndFormatVectors } = require('../utils/utils');
+const { linearAdditionalConvolution } = require('./calculationController');
 
 exports.getHomepage = (req, res, next) => {
     res.status(200).render('home', {
@@ -44,7 +45,22 @@ exports.getMarks = async (req, res, next) => {
 
 exports.getResults = async (req, res, next) => {
 
-    const results = await executeQuery('SELECT * FROM Result')
+    // let vectors = await linearAdditionalConvolution();
+    // vectors = vectors.sort((a, b) => b.convolutionResult - a.convolutionResult);
+
+    // for (let i = 0; i < vectors.length; i++) {
+    //     const resObj = {
+    //         idLPR: 1,
+    //         idAlt: +vectors[i].id,
+    //         ResRange: i + 1,
+    //         AWeight: vectors[i].convolutionResult.toFixed(2)
+    //     };
+
+    //     const result = await executeQuery(`INSERT INTO Result SET ?`, resObj);
+    //     console.log(result);
+    // }
+
+    const results = await executeQuery('SELECT * FROM Result');
 
     res.status(200).render('results', {
         title: 'Results',
@@ -73,11 +89,6 @@ exports.getVectors = async (req, res, next) => {
 exports.getLPRS = (req, res, next) => {
     res.status(200).render('lprs', {
         title: 'LPRs'
-    });
-};
-exports.getChooseNameCriteria = (req, res, next) => {
-    res.status(200).render('chooseNameCriteria', {
-        title: 'choose'
     });
 };
 

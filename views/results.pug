@@ -1,4 +1,28 @@
 extends base
 
 block content
-    h1 results        
+    h2 Результаты
+    .table
+        .table-row
+            .table-cell
+                p idRes         
+            .table-cell
+                p idLPR         
+            .table-cell
+                p idAlt         
+            .table-cell
+                p ResRange         
+            .table-cell
+                p AWeight
+        each result in results
+            .table-row
+                .table-cell
+                    p= result.idRes         
+                .table-cell
+                    p= result.idLPR         
+                .table-cell
+                    p= result.idAlt         
+                .table-cell
+                    p= result.ResRange         
+                .table-cell
+                    p= result.AWeight         

@@ -60,12 +60,13 @@ exports.getResults = async (req, res, next) => {
     //     console.log(result);
     // }
 
-    const results = await executeQuery('SELECT * FROM Result');
-
+    const results = await executeQuery('SELECT idRes, idLPR, AName, ResRange, AWeight FROM Result INNER JOIN Alternative ON Result.idAlt = Alternative.idAlt' +
+    ' ORDER BY ResRange ASC');
     res.status(200).render('results', {
         title: 'Results',
         results
     });
+
 };
 
 exports.getVectors = async (req, res, next) => {
@@ -79,6 +80,7 @@ exports.getVectors = async (req, res, next) => {
             return 0;
         });
     }
+    
 
     res.status(200).render('vectors', {
         title: 'Vectors',

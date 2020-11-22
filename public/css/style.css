@@ -223,8 +223,8 @@ input, select, option {
 
 input[type="submit"] {
     display: block;
-    margin: 0 auto;
-    width: 15rem;
+    min-width: 15rem;
+    width: max-content;
 }
 
 #add-alt {

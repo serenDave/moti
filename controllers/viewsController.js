@@ -45,8 +45,8 @@ exports.getMarks = async (req, res, next) => {
 
 exports.getResults = async (req, res, next) => {
 
-    // let vectors = await linearAdditionalConvolution();
-    // vectors = vectors.sort((a, b) => b.convolutionResult - a.convolutionResult);
+    let vectors = await linearAdditionalConvolution();
+    vectors = vectors.sort((a, b) => b.convolutionResult - a.convolutionResult);
 
     // for (let i = 0; i < vectors.length; i++) {
     //     const resObj = {
@@ -62,11 +62,11 @@ exports.getResults = async (req, res, next) => {
 
     const results = await executeQuery('SELECT idRes, idLPR, AName, ResRange, AWeight FROM Result INNER JOIN Alternative ON Result.idAlt = Alternative.idAlt' +
     ' ORDER BY ResRange ASC');
+
     res.status(200).render('results', {
         title: 'Results',
         results
     });
-
 };
 
 exports.getVectors = async (req, res, next) => {
@@ -80,7 +80,6 @@ exports.getVectors = async (req, res, next) => {
             return 0;
         });
     }
-    
 
     res.status(200).render('vectors', {
         title: 'Vectors',
@@ -126,3 +125,44 @@ exports.getEditView = async (req, res, next) => {
 
     res.status(200).render('editView', resultObj);
 };
+
+exports.getMainCriteriaView = async (req, res) => {
+    const marks = await executeQuery(
+        'SELECT * FROM Mark INNER JOIN Сriterion ON Mark.idCrit = Сriterion.idCrit'
+    );
+
+    const formattedMarks = [];
+
+    marks.forEach((mark) => {
+        const markIndex = formattedMarks.findIndex(m => m.name === mark.CName);
+
+        if (markIndex !== -1 ) {
+            if (formattedMarks[markIndex].type === 'select') {
+                formattedMarks[markIndex].options.push(mark.MName);
+            }
+        } else {
+            let markObj = {
+                id: mark.idCrit,
+                name: mark.CName,
+                type: 'input'
+            };
+
+            if (mark.ScaleType === 'шкала порядковая' || mark.ScaleType === 'шкала наименований') {
+                markObj = {
+                    id: mark.idCrit,
+                    name: mark.CName,
+                    type: 'select',
+                    select: true,
+                    options: [mark.MName]
+                };
+            }
+
+            formattedMarks.push(markObj);
+        }
+    });
+
+    res.status(200).render('mainCriterion', {
+        title: 'Choosing main criterion',
+        marks: formattedMarks
+    });
+}

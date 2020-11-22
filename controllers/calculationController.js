@@ -66,3 +66,57 @@ exports.linearAdditionalConvolution = async () => {
 
     return vectors;
 };
+
+const passMiminalCriterias = (vectors, data) => {
+    return vectors.filter((vector) => {
+        for (value of vector.values) {
+            const selected = data[value.CName];
+
+            if (selected.value !== 'skip' && selected.value != 0) {
+                if (selected.compare === 'strict') {
+                    if (value.MName !== selected.value) {
+                        return false;
+                    }
+                } else if (selected.compare === 'min') {
+                    try {
+                        const intValue = parseInt(value.MName.replace(' ', ''));
+                        if (intValue < parseInt(selected.value)) {
+                            return false;
+                        }
+                    } catch (e) {}
+                }
+            }
+        }
+
+        return true;
+    });
+}
+
+exports.processMainCriterion = async (data) => {
+    let vectors = await module.exports.comparePareto();
+
+    vectors = passMiminalCriterias(vectors, data);
+
+    const additionalWinners = [];
+    const winner = vectors.reduce((winner, vectorToCompare, index) => {
+        if (index === 0) {
+            return vectorToCompare;
+        } 
+
+        const criteriaIndex = vectorToCompare.values.findIndex((value) => value.CName === data.main);
+
+        if (vectorToCompare.values[criteriaIndex].MName > winner.values[criteriaIndex].MName) {
+            return vectorToCompare;
+        } else if (vectorToCompare.values[criteriaIndex].MName < winner.values[criteriaIndex].MName) {
+            return winner;
+        } else {
+            additionalWinners.push(winner);
+            return vectorToCompare;
+        }
+    });
+
+    return {
+        winner,
+        additionalWinners
+    };
+}

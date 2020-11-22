@@ -1,3 +1,4 @@
+const calculationController = require('./calculationController');
 const pool = require('../dbConnection');
 
 let queryStr;
@@ -95,3 +96,32 @@ exports.remove = async (req, res, next) => {
         data: result
     });
 };
+
+exports.processMainCriterion = async (req, res, next) => {
+    const data = req.body;
+
+    const { winner, additionalWinners } = await calculationController.processMainCriterion(data);
+
+    const result = await pool.query('INSERT INTO Result SET ?', {
+        idAlt: +winner.id,
+        ResRange: 1
+    });
+
+    if (additionalWinners.length) {
+        additionalWinners.forEach(winner => {
+            await pool.query('INSERT INTO Result SET ?', {
+                idAlt: +winner.id,
+                ResRange: 1
+            });
+        })
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Alternatives calculated successfully',
+        data: {
+            winner,
+            additionalWinners
+        }
+    });
+}

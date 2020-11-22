@@ -230,3 +230,7 @@ input[type="submit"] {
 #add-alt {
     margin: 0;
 }
+
+.winner {
+    display: none;
+}

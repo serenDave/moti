@@ -30,11 +30,18 @@ getResultButton.addEventListener('click', (e) => {
         .then((res) => res.json())
         .then((results) => {
             // 4. send info to client, everything's ok
-            console.log(results);
+            // 5. client, ok, reload page with results
+            const winnerId = document.querySelector('#winner-id');
+            winnerId.textContent = results.data.winner.id;
+            
+            const winnerName = document.querySelector('#winner-name');
+            winnerName.textContent = results.data.winner.name;
+
+            const winnerContainer = document.querySelector('.winner');
+            winnerContainer.style.display = 'block';
         })
         .catch((e) => {
             console.log(e.message);
         });
     
-    // 5. client, ok, reload page with results
 });

@@ -108,12 +108,12 @@ exports.processMainCriterion = async (req, res, next) => {
     });
 
     if (additionalWinners.length) {
-        additionalWinners.forEach(winner => {
+        for (const winner of additionalWinners) {
             await pool.query('INSERT INTO Result SET ?', {
                 idAlt: +winner.id,
                 ResRange: 1
             });
-        })
+        }
     }
 
     res.status(200).json({

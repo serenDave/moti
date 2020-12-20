@@ -12,5 +12,6 @@ router.get('/vectors', viewsController.getVectors);
 router.get('/lprs', viewsController.getLPRS);
 router.get('/editView/:type/:id', viewsController.getEditView);
 router.get('/main-criteria', viewsController.getMainCriteriaView);
+router.get('/voting-results', viewsController.getVotingResults);
 
 module.exports = router;

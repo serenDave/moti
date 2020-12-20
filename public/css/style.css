@@ -234,3 +234,13 @@ input[type="submit"] {
 .winner {
     display: none;
 }
+
+.table-cell--radio {
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"] {
+    width: max-content;
+    margin-right: 1rem;
+}

@@ -1,5 +1,5 @@
-const { executeQuery, getAndFormatVectors } = require('../utils/utils');
-const { linearAdditionalConvolution } = require('./calculationController');
+const { executeQuery, getAndFormatVectors, getVotingResults } = require('../utils/utils');
+const { linearAdditionalConvolution, getAbsoluteWinner, getCopelandWinner } = require('./calculationController');
 
 exports.getHomepage = (req, res, next) => {
     res.status(200).render('home', {
@@ -87,9 +87,12 @@ exports.getVectors = async (req, res, next) => {
     });
 };
 
-exports.getLPRS = (req, res, next) => {
+exports.getLPRS = async (req, res, next) => {
+    const LPRs = await executeQuery('SELECT * FROM LPR');
+
     res.status(200).render('lprs', {
-        title: 'LPRs'
+        title: 'LPRs',
+        LPRs
     });
 };
 
@@ -166,3 +169,20 @@ exports.getMainCriteriaView = async (req, res) => {
         marks: formattedMarks
     });
 }
+
+exports.getVotingResults = async (req, res) => {
+    const votingResults = await getVotingResults();
+
+    const absoluteWinner = getAbsoluteWinner(votingResults);
+    const [absoluteWinnerInfo] = await executeQuery('SELECT * FROM Alternative WHERE idAlt = ?', [absoluteWinner]);
+    
+    const copelandWinner = getCopelandWinner(votingResults);
+    const [copelandWinnerInfo] = await executeQuery('SELECT * FROM Alternative WHERE idAlt = ?', [copelandWinner]);
+
+    res.status(200).render('votingResults', {
+        title: 'Voting Results', 
+        votingResults,
+        absoluteWinnerInfo,
+        copelandWinnerInfo
+    });
+};

@@ -18,8 +18,6 @@ getResultButton.addEventListener('click', (e) => {
     });
 
     // 2. Send info to the server:
-
-    // 3. Process it on the server, then
     fetch('/db/process-main-criterion', {
         method: 'post',
         headers: {
@@ -29,8 +27,7 @@ getResultButton.addEventListener('click', (e) => {
     })
         .then((res) => res.json())
         .then((results) => {
-            // 4. send info to client, everything's ok
-            // 5. client, ok, reload page with results
+            // 3. client, ok, reload page with results
             const winnerId = document.querySelector('#winner-id');
             winnerId.textContent = results.data.winner.id;
             
@@ -43,5 +40,4 @@ getResultButton.addEventListener('click', (e) => {
         .catch((e) => {
             console.log(e.message);
         });
-    
 });

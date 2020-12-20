@@ -1,4 +1,4 @@
-const { getAndFormatVectors } = require('../utils/utils');
+const { getAndFormatVectors, getVotingResults } = require('../utils/utils');
 
 exports.comparePareto = async () => {
     let vectors = await getAndFormatVectors();
@@ -18,7 +18,7 @@ exports.comparePareto = async () => {
             // for each value
             firstVector.values.forEach((value, i) => {
                 // if value of a worse than value of b
-                if (value.NormMark < secondVector.values[i].NormMark) {
+                if (value.NormMark <= secondVector.values[i].NormMark) {
                     numberOfWorserParameters++;
                 }
             });
@@ -120,3 +120,74 @@ exports.processMainCriterion = async (data) => {
         additionalWinners
     };
 }
+
+exports.getAbsoluteWinner = (votingResults) => {
+    const candidatesResult = {};
+    for (const candidate of votingResults.candidates) {
+        candidatesResult[candidate] = 0;
+    }
+
+    votingResults.candidates.forEach((candidate) => {
+        votingResults.votingResults.forEach((votingResult) => {
+            if (votingResult.votingArray[0] === candidate) {
+                candidatesResult[candidate] = candidatesResult[candidate] + votingResult.count;
+            }
+        });
+    });
+
+    const maxCount = Math.max(...Object.values(candidatesResult))
+    let winner = null;
+
+    for (const candidate in candidatesResult) {
+        if (candidatesResult[candidate] === maxCount) {
+            winner = candidate;
+        }
+    }
+
+    return +winner;
+};
+
+exports.getCopelandWinner = (votingResults) => {
+    const canditatesPoints = {};
+    for (const candidate of votingResults.candidates) {
+        canditatesPoints[candidate] = 0;
+    }
+
+    votingResults.candidates.forEach((candidate1) => {
+        votingResults.candidates.forEach((candidate2) => {
+            if (candidate1 !== candidate2) {
+                let candidate1Count = 0;
+                let candidate2Count = 0;
+                
+                votingResults.votingResults.forEach((votingResult) => {
+                    const { votingArray } = votingResult;
+
+                    if (votingArray.indexOf(candidate1) < votingArray.indexOf(candidate2)) {
+                        candidate1Count += votingResult.count;
+                    } else if (votingArray.indexOf(candidate1) > votingArray.indexOf(candidate2)) {
+                        candidate2Count += votingResult.count;
+                    }
+                });
+
+                if (candidate1Count > candidate2Count) {
+                    canditatesPoints[candidate1] = canditatesPoints[candidate1] + 1;
+                    canditatesPoints[candidate2] = canditatesPoints[candidate2] - 1;
+                } else if (candidate1Count < candidate2Count) {
+                    canditatesPoints[candidate2] = canditatesPoints[candidate2] + 1;
+                    canditatesPoints[candidate1] = canditatesPoints[candidate1] - 1;
+                }
+            }
+        });
+    });
+
+    const maxCount = Math.max(...Object.values(canditatesPoints));
+    let winner = null;
+
+    for (const candidate in canditatesPoints) {
+        if (canditatesPoints[candidate] === maxCount) {
+            winner = candidate;
+        }
+    }
+
+    return +winner;
+};

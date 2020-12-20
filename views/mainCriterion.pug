@@ -8,13 +8,13 @@ block content
         .table-row
             .table-cell Критерий
             .table-cell Ограничение
-            .table-cell Оптимальность
         each mark, index in marks
             .table-row.mark
                 .table-cell
-                    - let isChecked = index === 0;
-                    input(type="radio" name="main" id=`criterion-${mark.id}` value=`${mark.name}` checked=isChecked)
-                    label(for=`criterion-${mark.id}`)= mark.name
+                    .table-cell--radio
+                        - let isChecked = index === 0;
+                        input(type="radio" name="main" id=`criterion-${mark.id}` value=`${mark.name}` checked=isChecked)
+                        label(for=`criterion-${mark.id}`)= mark.name
                 .table-cell
                     unless mark.select
                         input(
@@ -32,7 +32,6 @@ block content
                             each option in mark.options
                                 option(value=`${option}`)= option
                             option(value="skip") Не учитывать
-                .table-cell Max
 
     input(type="submit" class="add-btn" value="Получить результат" id="get-result")
 

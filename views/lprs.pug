@@ -1,4 +1,17 @@
 extends base
 
 block content
-    h1 lprs
+    h2 LPRs
+
+    .table
+        .table-row
+            .table-cell
+                p id Персони
+            .table-cell
+                p Ім'я Персони
+        each LPR in LPRs
+            .table-row
+                .table-cell
+                    p= LPR.idLPR
+                .table-cell
+                    p= LPR.LName 

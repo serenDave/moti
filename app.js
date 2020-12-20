@@ -29,12 +29,12 @@ app.all('*', (req, res, next) => {
 });
 
 // Starting server
-const port = process.env.PORT || 4000; 
+const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
     console.log(`App is running on port: ${port}`);
 });
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
     console.log('UNCAUGHT REJECTION:');
     console.log(err.name, err.message);
 

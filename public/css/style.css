@@ -223,10 +223,24 @@ input, select, option {
 
 input[type="submit"] {
     display: block;
-    margin: 0 auto;
-    width: 15rem;
+    min-width: 15rem;
+    width: max-content;
 }
 
 #add-alt {
     margin: 0;
+}
+
+.winner {
+    display: none;
+}
+
+.table-cell--radio {
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"] {
+    width: max-content;
+    margin-right: 1rem;
 }

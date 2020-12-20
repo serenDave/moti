@@ -1,0 +1,56 @@
+extends base
+
+block content
+    h2 Voting Results
+
+    .table
+        .table-row
+            .table-cell
+                p Кількість тих, хто проголосував         
+            .table-cell
+                p Кандидат 1     
+            .table-cell
+                p Кандидат 2        
+            .table-cell
+                p Кандидат 3
+            .table-cell
+                p Кандидат 4
+        each votingResult in votingResults.votingResults
+            .table-row
+                .table-cell
+                    p= votingResult.count
+                each candidate in votingResult.votingArray
+                    .table-cell
+                        p= candidate
+
+    h2 Переможець за абсолютною більшістю
+
+    .table
+        .table-row
+            .table-cell
+                p Id альтернативи
+            .table-cell
+                p Назва альтернативи
+        .table-row
+            .table-cell
+                p= absoluteWinnerInfo.idAlt
+            .table-cell
+                p= absoluteWinnerInfo.AName
+
+    h2 Переможець за правилом Копленда
+
+    .table
+        .table-row
+            .table-cell
+                p Id альтернативи
+            .table-cell
+                p Назва альтернативи
+        .table-row
+            .table-cell
+                p= copelandWinnerInfo.idAlt
+            .table-cell
+                p= copelandWinnerInfo.AName
+
+
+
+    

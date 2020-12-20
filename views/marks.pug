@@ -4,7 +4,7 @@ block content
     h2 Оценки
     form.form(action="#")
         .form__input
-            +mark
+            +mark(critNames)
         input(type="submit" value="Добавить" class="add-btn")
     .table
         .table-row
@@ -44,7 +44,7 @@ block script
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
 
-            const idCrit = document.querySelector('input[name="id-crit"]').value;
+            const idCrit = document.querySelector('select[name="crit-id"]').value;
             const MName = document.querySelector('input[name="mname"]').value;
             const MRange = document.querySelector('input[name="mrange"]').value;
             const NumMark = document.querySelector('input[name="num-mark"]').value;

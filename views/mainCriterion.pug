@@ -1,0 +1,54 @@
+extends base
+
+block content
+    h2 Выберите главный критерий слева от названия
+    h4 Установите ограничения для других критериев
+
+    .table
+        .table-row
+            .table-cell Критерий
+            .table-cell Ограничение
+        each mark, index in marks
+            .table-row.mark
+                .table-cell
+                    .table-cell--radio
+                        - let isChecked = index === 0;
+                        input(type="radio" name="main" id=`criterion-${mark.id}` value=`${mark.name}` checked=isChecked)
+                        label(for=`criterion-${mark.id}`)= mark.name
+                .table-cell
+                    unless mark.select
+                        input(
+                            type="number"
+                            class="input" 
+                            id=`criterion-input-${mark.id}` 
+                            placeholder="Введите мин. значение"
+                            data-name=`${mark.name}`)
+                    else
+                        select(
+                            name=`${mark.name}` 
+                            id=`criterion-input-${mark.id}` 
+                            class="input" 
+                            data-name=`${mark.name}`)
+                            each option in mark.options
+                                option(value=`${option}`)= option
+                            option(value="skip") Не учитывать
+
+    input(type="submit" class="add-btn" value="Получить результат" id="get-result")
+
+    .winner
+        h3 Победитель:
+        .table
+            .table-row
+                .table-cell ID
+                .table-cell Название
+            .table-row
+                .table-cell#winner-id
+                .table-cell#winner-name
+                
+
+block script
+    script(src="/js/mainCriterion.js")
+
+
+
+
